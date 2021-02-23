@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Auth;
 //use Request;
 
 class UsersController extends Controller
@@ -51,6 +52,7 @@ class UsersController extends Controller
             'password' => bcrypt($request->password),
         ]);
         //dump($user);exit;
+
         Auth::login($user);
         session()->flash('success', '欢迎，您将在这里开启一段新的旅程~');
         return redirect()->route('users.show', [$user]);
@@ -95,6 +97,16 @@ class UsersController extends Controller
 
         $users = User::paginate(6);
      return view('users.index',compact('users'));
+
+    }
+
+    public function destory(User $user)
+    {
+       $this->authorize('destroy', $user);
+       $user->delete();
+       session()->flash('succcess','成功删除用户！');
+       return back();
+
 
     }
 

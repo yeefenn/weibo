@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Status extends Model
 {
     use HasFactory;
+    // 允许批量赋值
+    protected $fillable = ['content'];
     // 一个微博属于一个用户
     public function user()
     {

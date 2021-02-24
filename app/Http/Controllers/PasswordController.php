@@ -12,6 +12,18 @@ use Carbon\Carbon;
 
 class PasswordController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('throttle:2,1', [
+            'only' => ['showLinkRequestForm']
+        ]);
+        $this->middleware('throttle:3,10', [
+            'only' => ['sendResetLinkEmail']
+        ]);
+    }
+
+
+
     public function showLinkRequestForm()
     {
 

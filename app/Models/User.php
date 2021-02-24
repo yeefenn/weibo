@@ -6,7 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-
+//use App\Models\Status;
 use Illuminate\Support\Str;
 class User extends Authenticatable
 {
@@ -61,8 +61,11 @@ class User extends Authenticatable
         return "http://www.gravatar.com/avatar/$hash?s=$size";
     }
 
-
-
+// 一个用户拥有多微博
+    public function statuses()
+    {
+        return $this->hasMany(Status::class);
+    }
 
 
 }

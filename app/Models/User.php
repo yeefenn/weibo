@@ -86,15 +86,19 @@ class User extends Authenticatable
     }
 
     // 关注和取消关注
-    public function follower($user_ids)
+    public function follow($user_ids)
     {
-      if(!is_array($user_ids)){
-          $user_ids=compact('user_ids');
-      }
-     return $this->followings->sync($user_ids,false);
+        if ( ! is_array($user_ids)) {
+            $user_ids = compact('user_ids');
+        }
+        $this->followings()->sync($user_ids, false);
+    //   if(!is_array($user_ids)){
+    //       $user_ids=compact('user_ids');
+    //   }
+    //  return $this->followings->sync($user_ids,false);
 
     }
-    public function unfollower($user_ids)
+    public function unfollow($user_ids)
     {
         if(!is_array($user_ids)){
             $user_ids=compact('user_ids');
